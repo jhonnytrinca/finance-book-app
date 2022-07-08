@@ -7,7 +7,7 @@ export const Container = styled.div`
   background-color: #30107D;
   
   .wrapper {
-    width: 80%;
+    width: 70%;
     height: 80%;
     display: flex;
     justify-content: space-between;
