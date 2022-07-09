@@ -34,12 +34,12 @@ export const TR = styled.div`
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 
-  .in {
+  .entry {
     font-weight: 600;
     color: #06D7A5;
   }
 
-  .out {
+  .exit {
     font-weight: 600;
       color: #DB3766;
   }

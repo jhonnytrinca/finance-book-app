@@ -4,6 +4,7 @@ import { Radio } from '..';
 import { Formik, FormikValues } from 'formik';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ValidationSchema } from './validation';
+import { DataProps } from '../hooks/useData';
 
 const initialValues = {
   name: '',
@@ -14,15 +15,11 @@ const initialValues = {
 
 type ModalProps = {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
+  handleSubmit: (values: DataProps) => void;
 };
 
-export const Modal = ({ setModalOpen }: ModalProps) => {
+export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
   const [type, setType] = useState('');
-
-  const handleSubmit = (values: FormikValues) => {
-    console.log(values);
-    setModalOpen(false);
-  };
 
   return (
     <S.Container>
@@ -39,14 +36,19 @@ export const Modal = ({ setModalOpen }: ModalProps) => {
           initialValues={initialValues}
           enableReinitialize={true}
           validationSchema={ValidationSchema}
-          onSubmit={(values: FormikValues) => handleSubmit(values)}
+          onSubmit={(values) => {
+            handleSubmit(values);
+            setModalOpen(false);
+          }}
         >
           {({ values, handleChange, setFieldValue, errors, touched }) => (
             <S.Form>
               <S.Title>Cadastrar Transação</S.Title>
               <S.Input
                 type='text'
-                placeholder={errors.name ?? 'Nome'}
+                placeholder={
+                  !!(touched.name && errors.name) ? errors.name : 'Nome'
+                }
                 value={values.name}
                 name='name'
                 onChange={handleChange}
@@ -54,7 +56,9 @@ export const Modal = ({ setModalOpen }: ModalProps) => {
               />
               <S.Input
                 type='text'
-                placeholder={errors.value ?? 'Preço'}
+                placeholder={
+                  !!(touched.value && errors.value) ? errors.value : 'Preço'
+                }
                 value={values.value}
                 name='value'
                 onChange={handleChange}
@@ -86,7 +90,11 @@ export const Modal = ({ setModalOpen }: ModalProps) => {
               </S.RadioWrapper>
               <S.Input
                 type='text'
-                placeholder={errors.category ?? 'Categoria'}
+                placeholder={
+                  !!(touched.category && errors.category)
+                    ? errors.category
+                    : 'Categoria'
+                }
                 value={values.category}
                 name='category'
                 onChange={handleChange}

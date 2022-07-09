@@ -1,49 +1,32 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { Header, Card, List, Modal } from '../components';
+import { useData } from '../components/hooks/useData';
 import * as S from '../styles/home';
-
-const ResumeItems = [
-  {
-    title: 'Entrada',
-    icon: '/feather-arrow-down.svg',
-    variant: false,
-    value: '1529289,52'
-  },
-  {
-    title: 'Saídas',
-    icon: '/feather-arrow-up.svg',
-    variant: false,
-    value: '1529289,52'
-  },
-  {
-    title: 'Saldo Total',
-    variant: true,
-    value: '50,00'
-  }
-];
-
-const data = [
-  {
-    id: 1,
-    description: 'Curso de NextJS',
-    value: '899',
-    category: 'Educação',
-    date: '12/02/2022 às 13h24',
-    type: 'in'
-  },
-  {
-    id: 2,
-    description: 'Curso de NextJS',
-    value: '12312312',
-    category: 'Educação',
-    date: '12/02/2022 às 13h24',
-    type: 'out'
-  }
-];
 
 const Home: NextPage = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const { data, handleDelete, handleSubmit, resumeData } = useData();
+
+  const ResumeItems = [
+    {
+      title: 'Entrada',
+      icon: '/feather-arrow-down.svg',
+      variant: false,
+      value: resumeData.entries
+    },
+    {
+      title: 'Saídas',
+      icon: '/feather-arrow-up.svg',
+      variant: false,
+      value: resumeData.exits
+    },
+    {
+      title: 'Saldo Total',
+      variant: true,
+      value: resumeData.total
+    }
+  ];
 
   return (
     <>
@@ -62,11 +45,13 @@ const Home: NextPage = () => {
             ))}
           </S.ResumeWrapper>
 
-          <List data={data} />
+          <List data={data} handleDelete={handleDelete} />
         </S.Wrapper>
       </S.Container>
 
-      {modalOpen && <Modal setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <Modal setModalOpen={setModalOpen} handleSubmit={handleSubmit} />
+      )}
     </>
   );
 };
