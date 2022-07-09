@@ -5,9 +5,12 @@ export const Container = styled.div`
   background-color: #F1F5F8;
 `
 
-export const ResumeWrapper = styled.div`
+export const Wrapper = styled.div`
   width: 70%;
   margin: 0 auto;
+`
+
+export const ResumeWrapper = styled.div`
   display: flex;
   gap: 20px;
   position: relative;
