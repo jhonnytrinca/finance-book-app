@@ -6,16 +6,16 @@ import { v4 as uuidv4 } from 'uuid';
 export type DataProps = {
   id?: string;
   name: string;
-  value: string;
+  value: number;
   category: string;
   date?: string;
   type: string;
 };
 
 type ResumeData = {
-  entries: string;
-  exits: string;
-  total: string;
+  entries: number;
+  exits: number;
+  total: number;
 };
 
 function getStorageValue() {
@@ -30,12 +30,12 @@ export const useData = () => {
     return getStorageValue();
   });
   const [resumeData, setResumeData] = useState<ResumeData>({
-    entries: '0',
-    exits: '0',
-    total: '0'
+    entries: 0,
+    exits: 0,
+    total: 0
   });
 
-  const handleSubmit = (values: DataProps) => {
+  const handleSubmit = (values: any) => {
     const date = format(new Date(), "dd/M/yyyy' às 'k'h'mm", {
       locale: ptBR
     });
@@ -52,22 +52,31 @@ export const useData = () => {
     const entries = data.filter((item) => item.type === 'entry');
     const exits = data.filter((item) => item.type === 'exit');
 
-    const entryValues = entries.reduce((acc, cur) => acc + +cur.value, 0);
-    const exitValues = exits.reduce((acc, cur) => acc + +cur.value, 0);
+    const entryValues = entries.reduce((acc, cur) => acc + +cur.value!, 0);
+    const exitValues = exits.reduce((acc, cur) => acc + +cur.value!, 0);
 
     localStorage.setItem('list', JSON.stringify(data));
     setResumeData({
-      entries: entryValues.toString(),
-      exits: exitValues.toString(),
-      total: (entryValues - exitValues).toString()
+      entries: entryValues,
+      exits: exitValues,
+      total: +(entryValues - exitValues).toFixed(2)
     });
   }, [data]);
 
+  const formatValue = (value: number) => {
+    const amount = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+
+    return `${amount}`;
+  };
+
   return {
     data,
-    setData,
     handleSubmit,
     handleDelete,
-    resumeData
+    resumeData,
+    formatValue
   };
 };

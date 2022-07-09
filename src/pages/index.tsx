@@ -8,7 +8,8 @@ import ArrowUp from '../../public/feather-arrow-up.svg';
 
 const Home: NextPage = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const { data, handleDelete, handleSubmit, resumeData } = useData();
+  const { data, handleDelete, handleSubmit, resumeData, formatValue } =
+    useData();
 
   const ResumeItems = [
     {
@@ -40,14 +41,18 @@ const Home: NextPage = () => {
               <Card
                 title={item.title}
                 icon={item.icon}
-                value={item.value}
+                value={formatValue(item.value)}
                 variant={item.variant}
                 key={index}
               />
             ))}
           </S.ResumeWrapper>
 
-          <List data={data} handleDelete={handleDelete} />
+          <List
+            data={data}
+            handleDelete={handleDelete}
+            formatValue={formatValue}
+          />
         </S.Wrapper>
       </S.Container>
 

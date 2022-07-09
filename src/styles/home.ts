@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  height: calc(100vh - 11.25rem);
+  min-height: calc(100vh - 11.25rem);
   background-color: #F1F5F8;
 
   @media(max-width: 800px) {

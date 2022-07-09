@@ -7,21 +7,22 @@ type ListProps = {
     id?: string;
     name: string;
     type: string;
-    value: string;
+    value: number;
     category: string;
     date?: string;
   }[];
   handleDelete: (id: string) => void;
+  formatValue: (value: number) => string;
 };
 
 const header = ['Descrição', 'Valor', 'Categoria', 'Data', ''];
 
-export const List = ({ data, handleDelete }: ListProps) => {
+export const List = ({ data, handleDelete, formatValue }: ListProps) => {
   return (
     <S.Table>
       <S.THead>
         {header.map((item, index) => (
-          <td key={index}>{item}</td>
+          <span key={index}>{item}</span>
         ))}
       </S.THead>
       <S.Tbody>
@@ -37,7 +38,7 @@ export const List = ({ data, handleDelete }: ListProps) => {
                   : null
               }`}
             >
-              R$ {item.value}
+              {formatValue(item.value)}
             </span>
             <span>{item.category}</span>
             <span>{item.date}</span>

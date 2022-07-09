@@ -1,28 +1,40 @@
 import * as S from './styles';
 import Image from 'next/image';
 import { Radio } from '..';
-import { Formik } from 'formik';
+import { Formik, FormikValues } from 'formik';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ValidationSchema } from './validation';
 import { DataProps } from '../../hooks/useData';
 import Close from '../../../public/close.svg';
 import ArrowUp from '../../../public/feather-arrow-up-circle.svg';
 import ArrowDown from '../../../public/feather-arrow-down-circle.svg';
+import { NumberFormatValues } from 'react-number-format';
 
 const initialValues = {
   name: '',
-  value: '',
+  value: undefined,
   type: '',
   category: ''
 };
 
 type ModalProps = {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
-  handleSubmit: (values: DataProps) => void;
+  handleSubmit: (values: FormikValues) => void;
 };
 
 export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
   const [type, setType] = useState('');
+
+  function currencyFormatter(value: any) {
+    if (!Number(value)) return '';
+
+    const amount = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value / 100);
+
+    return `${amount}`;
+  }
 
   return (
     <S.Container>
@@ -52,15 +64,25 @@ export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
                 onChange={handleChange}
                 error={!!(touched.name && errors.name)}
               />
-              <S.Input
+              <S.ValueInput
                 type='text'
                 placeholder={
                   !!(touched.value && errors.value) ? errors.value : 'Preço'
                 }
                 value={values.value}
                 name='value'
-                onChange={handleChange}
+                onValueChange={(values) => {
+                  const { value }: NumberFormatValues = values;
+                  setFieldValue(
+                    'value',
+                    String((Number(value) / 100).toFixed(2))
+                  );
+                }}
                 error={!!(touched.value && errors.value)}
+                format={currencyFormatter}
+                prefix={'R$ '}
+                thousandSeparator='.'
+                decimalSeparator=','
               />
               <S.RadioWrapper>
                 <Radio

@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Form as FormikForm } from 'formik';
+import NumberFormat from 'react-number-format';
 
 export const Container = styled.div`
   position: fixed;
@@ -49,17 +50,10 @@ export const Title = styled.h1`
   }
 `
 
-export const Input = styled.input<{error?: boolean}>`
+const mutualInput = css`
   padding: 1.25rem;
   font-size: 1.25rem;
   border-radius: 0.5rem;
-  border: 1px solid ${({error}) => !!error ? '#e23161' : '#D9D9D9'};
-  background-color: #F7F7F7;
-  color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
-
-  &::placeholder {
-    color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
-  }
 
   &:focus {
     outline: none;
@@ -68,6 +62,28 @@ export const Input = styled.input<{error?: boolean}>`
   @media(max-width: 800px) {
     padding: 0.8rem;
     font-size: 1rem;
+  }
+`
+
+export const Input = styled.input<{error?: boolean}>`
+  ${mutualInput}
+  border: 1px solid ${({error}) => !!error ? '#e23161' : '#D9D9D9'};
+  background-color: #F7F7F7;
+  color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
+
+  &::placeholder {
+    color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
+  }
+`
+
+export const ValueInput = styled(NumberFormat)<{error?: boolean}>`
+  ${mutualInput}
+  border: 1px solid ${({error}) => !!error ? '#e23161' : '#D9D9D9'};
+  background-color: #F7F7F7;
+  color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
+
+  &::placeholder {
+    color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
   }
 `
 
