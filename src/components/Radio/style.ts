@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Label = styled.label<{checked: boolean, name: string}>`
+export const Label = styled.label<{checked: boolean, name: string, error: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@ export const Label = styled.label<{checked: boolean, name: string}>`
   cursor: pointer;
   width: 100%;
   height: 68px;
-  border: ${({checked}) => !checked ? '1px solid #D9D9D9' : null };
+  border: 1px solid ${({checked, error}) => error ? '#e23161': !checked ? '#D9D9D9' : 'transparent'};
   border-radius: 7px;
   color: #4E5555;
   font-size: 20px;

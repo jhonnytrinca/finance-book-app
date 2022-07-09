@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Form as FormikForm } from 'formik';
 
 export const Container = styled.div`
   position: fixed;
@@ -38,17 +39,25 @@ export const Title = styled.h1`
   padding: 16px 0;
 `
 
-export const Input = styled.input`
+export const Input = styled.input<{error?: boolean}>`
   padding: 20px;
   font-size: 20px;
   border-radius: 7px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid ${({error}) => !!error ? '#e23161' : '#D9D9D9'};
   background-color: #F7F7F7;
-  color: #555555;
+  color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
+
+  &::placeholder {
+    color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
+  }
+
+  &:focus {
+    outline: none;
+  }
 
 `
 
-export const Form = styled.form`
+export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
   gap: 20px;

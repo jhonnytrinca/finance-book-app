@@ -1,10 +1,26 @@
 import * as S from './style';
 import Image from 'next/image';
 
-export const Radio = ({ checked, name, icon, placeholder, value }: any) => {
+type RadioProps = {
+  checked: boolean;
+  name: string;
+  icon: string;
+  placeholder: string;
+  onChange: () => void;
+  error: boolean;
+};
+
+export const Radio = ({
+  checked,
+  name,
+  icon,
+  placeholder,
+  onChange,
+  error
+}: RadioProps) => {
   return (
-    <S.Label checked={checked} name={name}>
-      <S.Input type='radio' name={name} value={value} />
+    <S.Label checked={checked} name={name} onChange={onChange} error={error}>
+      <S.Input type='radio' name={name} />
       <Image src={icon} alt='Icone' width='28' height='28' />
       <span>{placeholder}</span>
     </S.Label>
