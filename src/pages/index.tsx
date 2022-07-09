@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import { Header, Card, List } from '../components';
+import { Header, Card, List, Modal } from '../components';
 import * as S from '../styles/home';
 
 const ResumeItems = [
@@ -65,6 +65,8 @@ const Home: NextPage = () => {
           <List data={data} />
         </S.Wrapper>
       </S.Container>
+
+      {modalOpen && <Modal setModalOpen={setModalOpen} />}
     </>
   );
 };
