@@ -21,7 +21,7 @@ export const Radio = ({
   return (
     <S.Label checked={checked} name={name} onChange={onChange} error={error}>
       <S.Input type='radio' name={name} />
-      <Image src={icon} alt='Icone' width='28' height='28' />
+      <Image src={icon} alt='Icone' />
       <span>{placeholder}</span>
     </S.Label>
   );

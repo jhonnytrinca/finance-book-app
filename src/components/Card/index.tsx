@@ -12,9 +12,7 @@ export const Card = ({ title, icon, value, variant }: CardProps) => (
   <S.Card variant={variant}>
     <S.Title>
       <span>{title}</span>
-      {icon && (
-        <Image src={icon} alt='Icone indicador' width='19' height='19' />
-      )}
+      {icon && <Image src={icon} alt='Icone indicador' />}
     </S.Title>
     <S.Value>R$ {value}</S.Value>
   </S.Card>

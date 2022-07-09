@@ -4,7 +4,10 @@ import { Radio } from '..';
 import { Formik } from 'formik';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ValidationSchema } from './validation';
-import { DataProps } from '../hooks/useData';
+import { DataProps } from '../../hooks/useData';
+import Close from '../../../public/close.svg';
+import ArrowUp from '../../../public/feather-arrow-up-circle.svg';
+import ArrowDown from '../../../public/feather-arrow-down-circle.svg';
 
 const initialValues = {
   name: '',
@@ -25,12 +28,7 @@ export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
     <S.Container>
       <S.Modal>
         <S.CloseButton onClick={() => setModalOpen(false)}>
-          <Image
-            src='/close.svg'
-            alt='Botão fechar modal'
-            width='26'
-            height='26'
-          />
+          <Image src={Close} alt='Botão fechar modal' />
         </S.CloseButton>
         <Formik
           initialValues={initialValues}
@@ -66,7 +64,7 @@ export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
               />
               <S.RadioWrapper>
                 <Radio
-                  icon='/feather-arrow-up-circle.svg'
+                  icon={ArrowUp}
                   placeholder='Entrada'
                   checked={type === 'entry'}
                   name={type}
@@ -77,7 +75,7 @@ export const Modal = ({ setModalOpen, handleSubmit }: ModalProps) => {
                   error={!!(touched.type && errors.type)}
                 />
                 <Radio
-                  icon='/feather-arrow-down-circle.svg'
+                  icon={ArrowDown}
                   placeholder='Saída'
                   checked={type === 'exit'}
                   name={type}

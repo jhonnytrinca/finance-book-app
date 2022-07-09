@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { Header, Card, List, Modal } from '../components';
-import { useData } from '../components/hooks/useData';
+import { useData } from '../hooks/useData';
 import * as S from '../styles/home';
+import ArrowDown from '../../public/feather-arrow-down.svg';
+import ArrowUp from '../../public/feather-arrow-up.svg';
 
 const Home: NextPage = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -11,13 +13,13 @@ const Home: NextPage = () => {
   const ResumeItems = [
     {
       title: 'Entrada',
-      icon: '/feather-arrow-down.svg',
+      icon: ArrowUp,
       variant: false,
       value: resumeData.entries
     },
     {
       title: 'Saídas',
-      icon: '/feather-arrow-up.svg',
+      icon: ArrowDown,
       variant: false,
       value: resumeData.exits
     },

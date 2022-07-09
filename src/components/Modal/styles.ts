@@ -15,12 +15,17 @@ export const Container = styled.div`
 `
 
 export const Modal = styled.div`
-  width: 692px;
-  height: 623px;
+  width: 43.25rem;
+  height: 38rem;
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   position: relative;
-  padding: 52px;
+  padding: 3.25rem;
+
+  @media(max-width: 800px) {
+    height: 29rem;
+    padding: 2rem 1.5rem;
+  }
 `
 
 export const CloseButton = styled.button`
@@ -33,16 +38,21 @@ export const CloseButton = styled.button`
 `
 
 export const Title = styled.h1`
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: 600;
   color: #4E5555;
-  padding: 16px 0;
+  padding: 1rem 0;
+
+  @media(max-width: 800px) {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
 `
 
 export const Input = styled.input<{error?: boolean}>`
-  padding: 20px;
-  font-size: 20px;
-  border-radius: 7px;
+  padding: 1.25rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
   border: 1px solid ${({error}) => !!error ? '#e23161' : '#D9D9D9'};
   background-color: #F7F7F7;
   color: ${({error}) => !!error ? '#e23161' : '#555555'} ;
@@ -55,28 +65,38 @@ export const Input = styled.input<{error?: boolean}>`
     outline: none;
   }
 
+  @media(max-width: 800px) {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
 `
 
 export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const ApplyButton = styled.button`
   border: none;
   background-color: #401A9B;
   color: #fff;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 20px;
-  border-radius: 7px;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 1rem;
+
+  @media(max-width: 800px) {
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
 `
 
 export const RadioWrapper = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
 `

@@ -1,5 +1,6 @@
 import * as S from './styles';
 import Image from 'next/image';
+import Trash from '../../../public/feather-trash.svg';
 
 type ListProps = {
   data: {
@@ -41,12 +42,7 @@ export const List = ({ data, handleDelete }: ListProps) => {
             <span>{item.category}</span>
             <span>{item.date}</span>
             <S.Button onClick={() => handleDelete(item.id!)}>
-              <Image
-                src='/feather-trash.svg'
-                alt='Remover item'
-                width='13'
-                height='15'
-              />
+              <Image src={Trash} alt='Remover item' />
             </S.Button>
           </S.TR>
         ))}
