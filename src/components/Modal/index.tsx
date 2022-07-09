@@ -1,7 +1,7 @@
 import * as S from './styles';
 import Image from 'next/image';
 import { Radio } from '..';
-import { Formik, FormikValues } from 'formik';
+import { Formik } from 'formik';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ValidationSchema } from './validation';
 import { DataProps } from '../hooks/useData';

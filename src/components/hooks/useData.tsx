@@ -18,8 +18,17 @@ type ResumeData = {
   total: string;
 };
 
+function getStorageValue() {
+  const saved =
+    typeof window !== 'undefined' ? localStorage.getItem('list') : null;
+  const initial = JSON.parse(saved as string);
+  return initial || [];
+}
+
 export const useData = () => {
-  const [data, setData] = useState<DataProps[]>([]);
+  const [data, setData] = useState<DataProps[]>(() => {
+    return getStorageValue();
+  });
   const [resumeData, setResumeData] = useState<ResumeData>({
     entries: '0',
     exits: '0',
@@ -46,6 +55,7 @@ export const useData = () => {
     const entryValues = entries.reduce((acc, cur) => acc + +cur.value, 0);
     const exitValues = exits.reduce((acc, cur) => acc + +cur.value, 0);
 
+    localStorage.setItem('list', JSON.stringify(data));
     setResumeData({
       entries: entryValues.toString(),
       exits: exitValues.toString(),
