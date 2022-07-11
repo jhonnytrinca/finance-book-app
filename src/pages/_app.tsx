@@ -1,9 +1,8 @@
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;700&display=swap');
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -15,6 +14,15 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <meta charSet='utf-8' />
+        <link rel='icon' href='/logo.svg' />
+        <title>Finance Book App</title>
+        <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;700&display=swap');
+        </style>
+      </Head>
       <GlobalStyle /> <Component {...pageProps} />
     </>
   );
